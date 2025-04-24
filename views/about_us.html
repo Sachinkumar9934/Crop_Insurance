@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/x-icon" href="Us.png">
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us</title>
+  <script src="https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.production.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@babel/standalone@7.20.6/babel.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background-color: #1a1033;
+      color: #e6e6fa;
+      font-family: 'Inter', sans-serif;
+    }
+    .card-hover {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card-hover:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 20px rgba(147, 51, 234, 0.5);
+    }
+    .gradient-text {
+      background: linear-gradient(90deg, #9333ea, #c084fc);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .fade-in {
+      opacity: 0;
+      animation: fadeIn 1s forwards;
+    }
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+    .social-icon {
+      transition: color 0.2s ease, transform 0.2s ease;
+    }
+    .social-icon:hover {
+      transform: scale(1.2);
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    const { useState, useEffect } = React;
+
+    const DeveloperCard = ({ name, role, bio, image, github, linkedin, delay }) => {
+      const [isVisible, setIsVisible] = useState(false);
+
+      useEffect(() => {
+        const timer = setTimeout(() => setIsVisible(true), delay);
+        return () => clearTimeout(timer);
+      }, [delay]);
+
+      return (
+        <div
+          className={`bg-gray-900 p-6 rounded-lg card-hover ${isVisible ? 'fade-in' : ''}`}
+          style={{ animationDelay: `${delay}ms` }}
+        >
+          <img
+            src={image}
+            alt={name}
+            className="w-24 h-24 rounded-full mx-auto mb-4 object-cover"
+          />
+          <h3 className="text-xl font-bold gradient-text text-center">{name}</h3>
+          <p className="text-purple-300 text-center">{role}</p>
+          <p className="text-gray-300 mt-4 text-center">{bio}</p>
+          <div className="flex justify-center gap-4 mt-4">
+            <a
+              href={github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-400 hover:text-purple-400 social-icon"
+            >
+              <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.49.5.09.68-.22.68-.48v-1.7c-2.78.61-3.37-1.34-3.37-1.34-.46-1.16-1.12-1.47-1.12-1.47-.91-.62.07-.61.07-.61 1.01.07 1.54 1.04 1.54 1.04.89 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.64-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.03A9.564 9.564 0 0112 6.8c.85.004 1.71.11 2.52.33 1.91-1.3 2.75-1.03 2.75-1.03.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.94.68 1.9v2.81c0 .27.18.58.69.48A10.007 10.007 0 0022 12c0-5.52-4.48-10-10-10z"/>
+              </svg>
+            </a>
+            <a
+              href={linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-400 hover:text-purple-400 social-icon"
+            >
+              <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M19 3a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h14zm-.5 15.5v-5.3a3.26 3.26 0 00-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 011.4 1.4v4.93h2.79zm-6.79 0v-8.37H8.91v8.37h2.79zM10.31 8.5a1.69 1.69 0 001.69-1.69 1.69 1.69 0 00-1.69-1.69 1.69 1.69 0 00-1.69 1.69 1.69 1.69 0 001.69 1.69z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      );
+    };
+
+    const AboutUs = () => {
+      const developers = [
+        {
+          name: "Harshit Agarwal",
+          role: "Full Stack Developer",
+          bio: "Hello my name is harshit Agarwal i study in LPU keep your opportunies to urself im already tired",
+          image: "harshit.jpeg",
+          github: "https://github.com/HarshitAgarwal2107",
+          linkedin: "https://www.linkedin.com/in/harshit-agarwal2107/",
+        },
+        {
+          name: "Kumari Kirti",
+          role: "Full Stack Developer",
+          bio: "Turning ideas into clean, functional websites. Always learning, always building. Let’s create something awesome!",    
+          image: "kirti.jpeg",
+          github: "https://github.com/KumariKirti2114",
+          linkedin: "https://www.linkedin.com/in/kumari-kirti-529aa2273/",
+        },
+        {
+          name: "Sachin Kumar",
+          role: "Full Stack Developer",
+          bio: "Full Stack Web Developer skilled in PHP Tailwind css. Builds responsive UIs and scalable APIs. Passionate about clean, efficient code.",
+          image: "sachin.jpeg",
+          github: "https://github.com/Sachinkumar9934",
+          linkedin: "https://www.linkedin.com/in/sachin-kumar-636651298/",
+        },
+        {
+          name: "Yousra Ali",
+          role: "Full Stack Developer",
+          bio: "Crafting seamless, responsive, and user-friendly web experiences. Turning ideas into clean, interactive interfaces.",
+          image: "yousra.jpeg",
+          github: "https://github.com/YOUSRA786",
+          linkedin: "https://www.linkedin.com/in/yousraali/",
+        },
+      ];
+
+      return (
+        <div className="min-h-screen flex flex-col items-center justify-center py-12 px-4">
+          <h1 className="text-5xl font-extrabold gradient-text mb-12 text-center">
+            About Us
+          </h1>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl">
+            {developers.map((dev, index) => (
+              <DeveloperCard
+                key={dev.name}
+                {...dev}
+                delay={index * 200}
+              />
+            ))}
+          </div>
+        </div>
+      );
+    };
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<AboutUs />);
+  </script>
+</body>
+</html>
